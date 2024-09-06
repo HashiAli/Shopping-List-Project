@@ -80,7 +80,7 @@ function onAddItemSubmit(e) {
   addItemToDOM(items);
   checkUI()
   showNotification("Item added successfully!","green");
-  // document.querySelector("form").reset();
+  document.querySelector("form").reset();
 }
 
 
