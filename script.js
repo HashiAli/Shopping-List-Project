@@ -93,7 +93,7 @@ function addItemToDOM(item) {
                   `<td class="p-2 itemname">${toPascalCase(item.itemName)}</td>
                   <td class="p-2">${item.priority}</td>
                   <td class="p-2">${item.quantity}</td>
-                  <td class="p-2">${capitalizeFirstLetter(item.additionalNote)}</td>`;
+                  <td class="p-2 flex flex-wrap">${capitalizeFirstLetter(item.additionalNote)}</td>`;
   tr.className=classes
   const td = document.createElement("td");
   td.classList.add("p-2")
@@ -163,8 +163,7 @@ function checkUI() {
   const counter = document.getElementById("counter");
   counter.textContent = `Total Items: ${items.length}`;
 
-  // formBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Add Item';
-  // formBtn.style.backgroundColor = "#333";
+  itemSubmit.textContent = 'Add Item';
 
   isEditMode = false;
 }
@@ -179,7 +178,6 @@ function checkIfItemExists(item) {
     return exists
   });
 
-  // console.log(`Item ${item} exists: ${exists}`);
   return exists
   
 }
@@ -203,9 +201,20 @@ function removeItemFromStorage(item) {
   localStorage.setItem("items", JSON.stringify(itemsFromStorage));
   showNotification("Item removed successfully!","red");
 }
+function goTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'})
+}
 
-
-
+additionalNote.addEventListener('input', function(e) {
+  document.querySelector('#charLimit').textContent = `${additionalNote.value.length}/30`
+  if (additionalNote.value.length>=30) {
+    showNotification("Note should not exceed 30 characters!","red");
+    additionalNote.value = additionalNote.value.slice(0, 29);
+    
+  } 
+});
 
 
 
@@ -216,16 +225,18 @@ function removeItemFromStorage(item) {
 
 function setItemToEdit(item) {
   isEditMode = true;
-  tableBody
-    .querySelectorAll("tr")
-    .forEach((i) => i.classList.remove("edit-mode"));
-
+  document.querySelector("form").reset();
   item.classList.add("edit-mode");
   itemSubmit.innerHTML = 'Update Item';
   itemName.value = item.firstChild.textContent;
   quantity.value = item.children[2].textContent;
   priority.value = item.children[1].defaultValue
-  additionalNote.value = item.children[3].value
+  if (item.children[3].textContent === ""){
+  }
+  else{
+    additionalNote.value = item.children[3].textContent
+  }
+  goTop();
 
 }
 
