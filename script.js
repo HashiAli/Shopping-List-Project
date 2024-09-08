@@ -20,7 +20,7 @@ function showNotification(message ,color) {
   notification.classList.add("show");
   msgCon.appendChild(notification)
 
-  // Automatically hide the notification after 3 seconds
+  // Automatically hide the notification after 2.5 seconds
   setTimeout(() => {
 
     notification.classList.remove("show");
@@ -28,7 +28,7 @@ function showNotification(message ,color) {
     setTimeout(() => {
       msgCon.removeChild(notification)
     }, 1000)
-  }, 2500);
+  }, 1500);
 }
 function toPascalCase(str) {
   return str
@@ -75,11 +75,9 @@ function onAddItemSubmit(e) {
   // Check for edit mode
   if (isEditMode) {
     const itemToEdit = tableBody.querySelector(".edit-mode");
-    console.log(itemToEdit);
-    // removeItemFromStorage(itemToEdit);
-    itemToEdit.classList.remove("edit-mode");
+    removeItemFromStorage(itemToEdit);
     itemToEdit.remove();
-    isEditMode = false;
+    showNotification("Item Edited Successfully","blue")
   }
 
   else {
@@ -91,13 +89,13 @@ function onAddItemSubmit(e) {
 
   let radio=getradioValues(priority)
   // Add item to local storage
-  addItemToStorage(itemName.value, quantity.value, radio, additionalNote.value);
+  addItemToStorage(itemName.value.toLowerCase(), quantity.value, radio, additionalNote.value);
   // Add item to DOM
   let items = { itemName: itemName.value, quantity: quantity.value, priority: radio, additionalNote: additionalNote.value }
   addItemToDOM(items);
+  if(!isEditMode){showNotification("Item added successfully!","green");}
   checkUI()
-  showNotification("Item added successfully!","green");
-  document.querySelector("form").reset();
+  
 }
 
 
@@ -157,16 +155,16 @@ function getItemsFromStorage() {
 function clearItems() {
   if (confirm("Are you sure to clear All Items?")) {
     // Clear from DOM
-    localStorage.clear();
     while (tableBody.firstChild) {
       tableBody.removeChild(tableBody.firstChild);
     }
     // Clear from localStorage
+    localStorage.clear();
     showNotification("All items cleared successfully!","blue"); 
     checkUI();
   }
 }
-function checkUI() {
+function checkUI(item) {
 
   const items = tableBody.querySelectorAll("tr");
 
@@ -181,7 +179,7 @@ function checkUI() {
   counter.textContent = `Total Items: ${items.length}`;
 
   itemSubmit.textContent = 'Add Item';
-
+  document.querySelector("form").reset();
   isEditMode = false;
 }
 function checkIfItemExists(item) {
@@ -201,11 +199,11 @@ function checkIfItemExists(item) {
 function removeItem(item) {
     // Remove item from DOM
     item.remove()
-
     // Remove item from local storage
-
     removeItemFromStorage(item);
+    // Update UI
     checkUI()
+    //Show Notification
     showNotification("Item removed successfully!","red");
   
 }
@@ -221,15 +219,17 @@ function charLength(){
 function removeItemFromStorage(item) {
   let itemsFromStorage = getItemsFromStorage();
   let itemName=item.querySelector(".itemname").textContent.toLowerCase();
+  // console.log(itemName);
   // Filter out item to be removed
   itemsFromStorage = itemsFromStorage.filter((i) => i.itemName !== itemName);
   // Re-set to localstorage
   localStorage.setItem("items", JSON.stringify(itemsFromStorage));
 }
 
-additionalNote.addEventListener('input',charLength)
 
 function setItemToEdit(item) {
+  let classes =' bg-slate-400'
+  item.className=classes
   isEditMode = true;
   document.querySelector("form").reset();
   item.classList.add("edit-mode");
@@ -247,7 +247,7 @@ function setItemToEdit(item) {
     top: 0,
     behavior: 'smooth'
   })
-
+  showNotification("Edit Mode","blue")
 }
 
 function filterItems(e) {
@@ -255,14 +255,14 @@ function filterItems(e) {
   const items = tableBody.querySelectorAll("tr");
   const text = itemFilter.value.toLowerCase()
   if(!text==""){
-  items.forEach((item) => {
-    const firstCell = item.firstElementChild; // Access the first child (first <td>)
-    if (firstCell.textContent.toLowerCase().includes(text)) {
-      const secondCell = firstCell.nextElementSibling; // Access the second <td>
-      const thirdCell = secondCell.nextElementSibling; // Access the third <td>
-      const fourthCell = thirdCell.nextElementSibling;
-      let data={ itemName:firstCell.textContent,priority: secondCell.textContent, quantity:thirdCell.textContent,additionalNote:fourthCell.textContent}
-      // console.log(data);
+    items.forEach((item) => {
+      const firstCell = item.firstElementChild; // Access the first child (first <td>)
+      if (firstCell.textContent.toLowerCase().includes(text)) {
+        const secondCell = firstCell.nextElementSibling; // Access the second <td>
+        const thirdCell = secondCell.nextElementSibling; // Access the third <td>
+        const fourthCell = thirdCell.nextElementSibling;
+        let data={ itemName:firstCell.textContent,priority: secondCell.textContent, quantity:thirdCell.textContent,additionalNote:fourthCell.textContent}
+        // console.log(data);
       tableBody.innerHTML=""
       addItemToDOM(data)
       
@@ -283,6 +283,7 @@ function init() {
   clearBtn.addEventListener("click", clearItems);
   // itemFilter.addEventListener("input", filterItems);
   document.addEventListener("DOMContentLoaded", displayItems);
+  additionalNote.addEventListener('input',charLength)
 }
 
 init();
