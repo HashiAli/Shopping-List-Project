@@ -13,12 +13,12 @@
   <link href="https://api.fontshare.com/v2/css?f[]=telma@300,400,500,700&display=swap" rel="stylesheet" />
 </head>
 
-<body class="w-screen h-screen flex bg-white flex-col overflow-x-hidden lg:flex-row overflow-hidden md:flex-col">
-  <div class="bg-blue-500 h-full md:w-full h-full flex flex-col lg:w-1/2 h-full">
-    <div class="bg-yellow-500 bg-transparent flex flex-wrap md:w-full h-2/3 xl:w-full h-2/3" id="notifi">
+<body class="flex bg-white flex-col overflow-visible lg:flex-row lg:overflow-hidden md:flex-col">
+  <div id="main1" class=" h-full md:w-full md:h-full md:flex md:flex-col lg:w-1/2 lg:h-full">
+    <div class=" bg-transparent flex flex-wrap md:w-full md:h-2/3 xl:w-2/3 xl:h-1/5" id="notifi">
     </div>
-    <div class="bg-gray-500 w-full h-full flex items-start justify-center md: h-full w-full lg:pt-20">
-      <div class="w-full h-full p-8 rounded-lg bg-gray-100 drop-shadow-md md:w-3/5 lg:w-full xl: w-2/3">
+    <div class=" w-full h-full flex items-start justify-center md: h-full w-full ">
+      <div class="p-8 rounded-lg bg-gray-100 drop-shadow-md md:w-3/5 lg:w-full xl:w-2/3">
         <form class="">
           <div class="logo text-center mb-6 flex gap-4 justify-center">
             <h1 class="text-5xl text-gray-700">Shopping List</h1>
@@ -49,8 +49,8 @@
       </div>
     </div>
   </div>
-  <div id="list-con" class="bg-red-500 w-full h-full flex justify-center">
-    <div class="h-full p-6 bg-gray-100 rounded-lg shadow-md w-full xl:w-4/5 h-3/4 lg: w-4/5 md:w-3/4">
+  <div id="list-con" class="w-full h-full flex justify-center items-center">
+    <div class="h-fit p-6 bg-gray-100 rounded-lg shadow-md w-full xl:w-4/5 h-3/4 lg: w-4/5 md:w-3/4">
       <div id="srch-bar" class="relative flex items-center my-2 md:mx-5">
         <input id="srch-input" type="text" placeholder="Filter Items" class="w-full p-2 border rounded" />
         <i class="absolute right-5 bx bx-search-alt text-gray-600 ml-2 text-lg"></i>
@@ -63,7 +63,7 @@
             Clear All
           </button>
         </div>
-        <div class="relative overflow-auto max-h-[820px] w-full">
+        <div class="relative overflow-auto max-h-[550px] w-full">
           <table class="w-full border-collapse ">
             <thead >
               <tr class="bg-gray-300 text-left">

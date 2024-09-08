@@ -14,7 +14,7 @@ let isEditMode = false;
 function showNotification(message ,color) {
   const msgCon = document.querySelector('#notifi');
   const notification = document.createElement("div");
-  let classes = "w-full h-full rounded shadow-md p-3 text-2xl text-center text-white mb-3" +" bg-"+color+"-600"
+  let classes = "z-10 w-full h-20 rounded shadow-md flex justify-center items-center text-2xl text-white mb-3" +" bg-"+color+"-600"
   notification.className = classes
   notification.innerHTML = `<p>${message}</p>`;
   notification.classList.add("show");
@@ -68,7 +68,7 @@ function onAddItemSubmit(e) {
       showNotification("Please fill in all fields !", "red");
       return;
   }
-  else if(!regex.test(itemName.value)){
+  else if(!regex.test(itemName.value)||!regex.test(quantity.value)){
     showNotification("Item name should only contain alphanumeric characters.","blue");
     return;
   }
@@ -226,11 +226,6 @@ function removeItemFromStorage(item) {
   // Re-set to localstorage
   localStorage.setItem("items", JSON.stringify(itemsFromStorage));
 }
-function goTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'})
-}
 
 additionalNote.addEventListener('input',charLength)
 
@@ -246,9 +241,12 @@ function setItemToEdit(item) {
   }
   else{
     additionalNote.value = item.children[3].textContent
-    charLength()
   }
-  goTop();
+  charLength()
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
 
 }
 
