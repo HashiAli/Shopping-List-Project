@@ -164,7 +164,16 @@ function clearItems() {
     checkUI();
   }
 }
-function checkUI(item) {
+function charLength(){
+
+  document.querySelector('#charLimit').textContent = `${additionalNote.value.length}/30`
+  if (additionalNote.value.length >= 30) {
+    showNotification("Note should not exceed 30 characters!", "red");
+    additionalNote.value = additionalNote.value.slice(0, 29);
+
+  }
+}  
+function checkUI() {
 
   const items = tableBody.querySelectorAll("tr");
 
@@ -177,7 +186,7 @@ function checkUI(item) {
   }
   const counter = document.getElementById("counter");
   counter.textContent = `Total Items: ${items.length}`;
-
+  document.querySelector('#charLimit').textContent=`0/30`
   itemSubmit.textContent = 'Add Item';
   document.querySelector("form").reset();
   isEditMode = false;
@@ -208,14 +217,6 @@ function removeItem(item) {
   
 }
 
-function charLength(){
-  document.querySelector('#charLimit').textContent = `${additionalNote.value.length}/30`
-  if (additionalNote.value.length >= 30) {
-    showNotification("Note should not exceed 30 characters!", "red");
-    additionalNote.value = additionalNote.value.slice(0, 29);
-
-  }
-}  
 function removeItemFromStorage(item) {
   let itemsFromStorage = getItemsFromStorage();
   let itemName=item.querySelector(".itemname").textContent.toLowerCase();
@@ -228,6 +229,12 @@ function removeItemFromStorage(item) {
 
 
 function setItemToEdit(item) {
+  // Remove all existing edit mode classes from other items
+  document.querySelectorAll('tr').forEach((i) =>{i.classList.remove("edit-mode")
+    i.classList.remove("bg-slate-400")
+  })
+  
+  // Set item to edit mode and populate form fields
   let classes =' bg-slate-400'
   item.className=classes
   isEditMode = true;
@@ -242,11 +249,12 @@ function setItemToEdit(item) {
   else{
     additionalNote.value = item.children[3].textContent
   }
-  charLength()
+  document.querySelector('#charimit')
   window.scrollTo({
     top: 0,
     behavior: 'smooth'
   })
+  charLength()
   showNotification("Edit Mode","blue")
 }
 
