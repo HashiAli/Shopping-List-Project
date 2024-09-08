@@ -1,6 +1,6 @@
 const itemName = document.querySelector(".item-name")
 const quantity = document.querySelector(".quantity")
-const priority = document.querySelector('input[name="Priority"]:checked')
+const priority = document.querySelectorAll('input[name="Priority"]')
 const additionalNote = document.getElementById("addNote")
 const itemSubmit = document.getElementById("submit");
 const itemFilter = document.getElementById("srch-input");
@@ -46,7 +46,21 @@ function displayItems() {
   itemsFromStorage.forEach((item) => addItemToDOM(item));
   checkUI();
 }
-
+function getradioValues(priority){
+  let radioValue
+  priority.forEach((value) =>{
+    if(value.checked==true){
+      radioValue=value;
+    }
+  })
+  return radioValue.value
+}
+function selectRadioButton(value) {
+  // Find the radio button with the specified value
+const radio = document.querySelector(`input[name="Priority"][value="${value}"]`);
+    radio.checked = true;
+  
+}
 function onAddItemSubmit(e) {
   e.preventDefault();
 
@@ -61,8 +75,8 @@ function onAddItemSubmit(e) {
   // Check for edit mode
   if (isEditMode) {
     const itemToEdit = tableBody.querySelector(".edit-mode");
-
-    removeItemFromStorage(itemToEdit.textContent);
+    console.log(itemToEdit);
+    // removeItemFromStorage(itemToEdit);
     itemToEdit.classList.remove("edit-mode");
     itemToEdit.remove();
     isEditMode = false;
@@ -74,13 +88,16 @@ function onAddItemSubmit(e) {
       return;
     }
   }
+
+  let radio=getradioValues(priority)
   // Add item to local storage
-  addItemToStorage(itemName.value, quantity.value, priority.defaultValue, additionalNote.value);
-  let items = { itemName: itemName.value, quantity: quantity.value, priority: priority.defaultValue, additionalNote: additionalNote.value }
+  addItemToStorage(itemName.value, quantity.value, radio, additionalNote.value);
+  // Add item to DOM
+  let items = { itemName: itemName.value, quantity: quantity.value, priority: radio, additionalNote: additionalNote.value }
   addItemToDOM(items);
   checkUI()
   showNotification("Item added successfully!","green");
-  document.querySelector("form").reset();
+  // document.querySelector("form").reset();
 }
 
 
@@ -93,7 +110,7 @@ function addItemToDOM(item) {
                   `<td class="p-2 itemname">${toPascalCase(item.itemName)}</td>
                   <td class="p-2">${item.priority}</td>
                   <td class="p-2">${item.quantity}</td>
-                  <td class="p-2 flex flex-wrap">${capitalizeFirstLetter(item.additionalNote)}</td>`;
+                  <td class="p-2 text-wrap">${capitalizeFirstLetter(item.additionalNote)}</td>`;
   tr.className=classes
   const td = document.createElement("td");
   td.classList.add("p-2")
@@ -189,9 +206,18 @@ function removeItem(item) {
 
     removeItemFromStorage(item);
     checkUI()
+    showNotification("Item removed successfully!","red");
   
 }
 
+function charLength(){
+  document.querySelector('#charLimit').textContent = `${additionalNote.value.length}/30`
+  if (additionalNote.value.length >= 30) {
+    showNotification("Note should not exceed 30 characters!", "red");
+    additionalNote.value = additionalNote.value.slice(0, 29);
+
+  }
+}  
 function removeItemFromStorage(item) {
   let itemsFromStorage = getItemsFromStorage();
   let itemName=item.querySelector(".itemname").textContent.toLowerCase();
@@ -199,7 +225,6 @@ function removeItemFromStorage(item) {
   itemsFromStorage = itemsFromStorage.filter((i) => i.itemName !== itemName);
   // Re-set to localstorage
   localStorage.setItem("items", JSON.stringify(itemsFromStorage));
-  showNotification("Item removed successfully!","red");
 }
 function goTop() {
   window.scrollTo({
@@ -207,21 +232,7 @@ function goTop() {
     behavior: 'smooth'})
 }
 
-additionalNote.addEventListener('input', function(e) {
-  document.querySelector('#charLimit').textContent = `${additionalNote.value.length}/30`
-  if (additionalNote.value.length>=30) {
-    showNotification("Note should not exceed 30 characters!","red");
-    additionalNote.value = additionalNote.value.slice(0, 29);
-    
-  } 
-});
-
-
-
-
-
-
-
+additionalNote.addEventListener('input',charLength)
 
 function setItemToEdit(item) {
   isEditMode = true;
@@ -230,11 +241,12 @@ function setItemToEdit(item) {
   itemSubmit.innerHTML = 'Update Item';
   itemName.value = item.firstChild.textContent;
   quantity.value = item.children[2].textContent;
-  priority.value = item.children[1].defaultValue
+  selectRadioButton(item.children[1].textContent);
   if (item.children[3].textContent === ""){
   }
   else{
     additionalNote.value = item.children[3].textContent
+    charLength()
   }
   goTop();
 

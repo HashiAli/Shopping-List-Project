@@ -2,89 +2,86 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shopping List</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="shortcut icon" href="checklist.png" type="image/x-icon" />
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <link href="https://api.fontshare.com/v2/css?f[]=supreme@200,500&f[]=chillax@300,400,500&display=swap"
-        rel="stylesheet" />
-    <link href="https://api.fontshare.com/v2/css?f[]=telma@300,400,500,700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopping List</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="shortcut icon" href="checklist.png" type="image/x-icon" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=supreme@200,500&f[]=chillax@300,400,500&display=swap"
+    rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=telma@300,400,500,700&display=swap" rel="stylesheet" />
 </head>
 
-<body class="flex bg-white flex-col lg:flex-row  md:flex-col">
-    <div class="w-full h-full md:w-2/3 h-full flex flex-col">
-        <div class=" bg-transparent	 h-1/5 flex justify-center flex-wrap p-6 xl:w-3/5 h-2/3 md: w-full h-2/3" id="notifi">
-            <!-- <div class="hide w-full h-full bg-red-400 rounded shadow-md p-3 text-2xl text-center text-white"
-                id="msg-con"></div> -->
-        </div>
-        <div class="  w-full h-full flex items-center justify-center lg:pt-20 md: h-full w-full">
-            <div class=" w-3/4 h-full p-8 rounded-lg bg-gray-100 drop-shadow-md lg: m-5 xl: w-2/3">
-                <form class="">
-                    <div class="logo text-center mb-6 flex gap-4 justify-center">
-                        <h1 class="text-4xl font-bold text-gray-700">Shopping List</h1>
-                    </div>
-                    <input class="input-bx item-name w-full p-2 mb-4 border rounded" type="text" placeholder="Item Name"
-                        required />
-                    <input class="input-bx quantity w-full p-2 mb-4 border rounded" placeholder="Quantity" type="text"
-                        required />
-                    <div class="input-bx mb-4" id="prioty">
-                        <label for="Priority" class="block font-medium text-gray-600 mb-2">Priority:</label>
-                        <div class="flex items-center justify-center space-x-4">
-                            <input type="radio" name="Priority" value="High" class="mr-1" />
-                            <label for="High Priority" class="text-gray-700">High</label>
-                            <input type="radio" name="Priority" value="Medium" class="mr-1" />
-                            <label for="Medium Priority" class="text-gray-700">Medium</label>
-                            <input type="radio" name="Priority" value="Normal" checked class="mr-1" />
-                            <label for="Normal" class="text-gray-700">Normal</label>
-                        </div>
-                    </div>
-                    <textarea id="addNote" rows="3" class="w-full p-2  border rounded"
-                        placeholder="Any Additional Note ?"></textarea>
-                        <div class="text-xs font-bold w-full mb-4 text-right">
-                            <label for="charLimit" id="charLimit" >0/30</label>
-                        </div>
-                    <button id="submit" type="submit"
-                        class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
-                        Add Item
-                    </button>
-                </form>
-            </div>
-        </div>
+<body class="w-screen h-screen flex bg-white flex-col overflow-x-hidden lg:flex-row overflow-hidden md:flex-col">
+  <div class="bg-blue-500 h-full md:w-full h-full flex flex-col lg:w-1/2 h-full">
+    <div class="bg-yellow-500 bg-transparent flex flex-wrap md:w-full h-2/3 xl:w-full h-2/3" id="notifi">
     </div>
-    <div id="list-con" class="w-full h-full mx-3 my-10 flex justify-center">
-        <div class=" h-full list-con bg-gray-100 p-6 rounded-lg shadow-md w-full xl:w-4/5 lg: w-4/5 md:w-full">
-            <div id="srch-bar" class="flex items-center mb-4">
-                <input id="srch-input" type="text" placeholder="Filter Items" class="w-full p-2 border rounded" />
-                <i class="bx bx-search-alt text-gray-600 ml-2"></i>
+    <div class="bg-gray-500 w-full h-full flex items-start justify-center md: h-full w-full lg:pt-20">
+      <div class="w-full h-full p-8 rounded-lg bg-gray-100 drop-shadow-md md:w-3/5 lg:w-full xl: w-2/3">
+        <form class="">
+          <div class="logo text-center mb-6 flex gap-4 justify-center">
+            <h1 class="text-5xl text-gray-700">Shopping List</h1>
+          </div>
+          <input class="input-bx item-name w-full p-2 mb-4 border rounded" type="text" placeholder="Item Name"
+            required />
+          <input class="input-bx quantity w-full p-2 mb-4 border rounded" placeholder="Quantity" type="text" required />
+          <div class="input-bx mb-4" id="prioty">
+            <label for="Priority" class="block font-medium text-gray-600 mb-2">Priority:</label>
+            <div class="flex items-center justify-center space-x-2 md:space-x-4">
+              <input type="radio" name="Priority" value="High" class="input-bx mr-1" />
+              <label for="High Priority" class="text-gray-700">High</label>
+              <input type="radio" name="Priority" value="Medium" class="input-bx mr-1" />
+              <label for="Medium Priority" class="text-gray-700">Medium</label>
+              <input type="radio" name="Priority" value="Normal" class="input-bx mr-1" checked />
+              <label for="Normal" class="text-gray-700">Normal</label>
             </div>
-            <div class="list-wrapper w-full overflow-y-auto">
-                <div class="w-full max-h-15 my-3 flex items-center justify-between">
-                    <label for="counter" id="counter" class="block mt-4 text-gray-700 font-medium underline underline-offset-8">Total Items:
-                        0</label>
-                    <button id="clr-btn" class="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600">
-                        Clear All
-                    </button>
-                </div>
-                <table class="w-full border-collapse overflow-y-auto">
-                    <thead>
-                        <tr class="bg-gray-300 text-left">
-                            <!-- <th class="p-2">Id</th> -->
-                            <th class="p-2">Name</th>
-                            <th class="p-2">Priority</th>
-                            <th class="p-2">Quantity</th>
-                            <th class="p-2">Note</th>
-                            <th class="p-2">Options</th>
-                        </tr>
-                    </thead>
-                    <tbody >
-                        <!-- Table Rows will be dynamically added here -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
+          </div>
+          <textarea id="addNote" rows="3" class="w-full p-2 border rounded"
+            placeholder="Any Additional Note ?"></textarea>
+          <div class="text-xs font-bold w-full mb-4 text-right">
+            <label class="text-gray-500" for="charLimit" id="charLimit">0/30</label>
+          </div>
+          <button id="submit" type="submit" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+            Add Item
+          </button>
+        </form>
+      </div>
     </div>
+  </div>
+  <div id="list-con" class="bg-red-500 w-full h-full flex justify-center">
+    <div class="h-full p-6 bg-gray-100 rounded-lg shadow-md w-full xl:w-4/5 h-3/4 lg: w-4/5 md:w-3/4">
+      <div id="srch-bar" class="relative flex items-center my-2 md:mx-5">
+        <input id="srch-input" type="text" placeholder="Filter Items" class="w-full p-2 border rounded" />
+        <i class="absolute right-5 bx bx-search-alt text-gray-600 ml-2 text-lg"></i>
+      </div>
+      <div class="list-wrapper w-full overflow-y-auto">
+        <div class="w-full max-h-15 my-2 flex items-center justify-between">
+          <label for="counter" id="counter"
+            class="block mt-4 ml-2 text-gray-700 font-medium underline underline-offset-8">Total Items: 0</label>
+          <button id="clr-btn" class="bg-red-500 text-white py-1 px-3 mr-6 rounded hover:bg-red-600">
+            Clear All
+          </button>
+        </div>
+        <div class="relative overflow-auto max-h-[820px] w-full">
+          <table class="w-full border-collapse ">
+            <thead >
+              <tr class="bg-gray-300 text-left">
+                <th class="p-2">Name</th>
+                <th class="p-2">Priority</th>
+                <th class="p-2">Quantity</th>
+                <th class="p-2">Note</th>
+                <th class="p-2">Options</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Table rows will be dynamically added here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="script.js"></script>
