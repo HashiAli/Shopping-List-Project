@@ -8,6 +8,7 @@ const tableBody = document.querySelector("tbody")
 const removeBtn = tableBody.querySelectorAll(".delete-btn");
 const clearBtn = document.getElementById("clr-btn");
 const editBtn = tableBody.querySelectorAll(".edit-btn");
+const clrFeild = document.getElementById("clr-ico")
 const regex = /^[a-zA-Z0-9]+$/;
 let isEditMode = false;
 
@@ -68,7 +69,7 @@ function onAddItemSubmit(e) {
       showNotification("Please fill in all fields !", "red");
       return;
   }
-  else if(!regex.test(itemName.value)||!regex.test(quantity.value)){
+  else if(!regex.test(itemName.value)){
     showNotification("Item name should only contain alphanumeric characters.","blue");
     return;
   }
@@ -260,7 +261,11 @@ function setItemToEdit(item) {
   charLength()
   showNotification("Edit Mode","blue")
 }
-
+function clearFeild() {
+  itemFilter.value = "";
+  clrFeild.style.display = "none";
+  filterItems();
+}
 function filterItems() {
   const counter = document.getElementById("counter");
   let visibleCount = 0;
@@ -282,14 +287,19 @@ function filterItems() {
   else{
     document.querySelector('#no-items').style.display="none"
     clearBtn.style.display = "block";
+
   }
   counter.textContent = `Total Items: ${visibleCount}`;
-}
-
-
-// Initialize app
-function init() {
-  // Event Listeners
+  if(text.length==0){
+  clrFeild.style.display = "none";}
+  else{clrFeild.style.display = "inline-block";
+    clrFeild.addEventListener('click',clearFeild)}
+  }
+  
+  
+  // Initialize app
+  function init() {
+    // Event Listeners
   itemSubmit.addEventListener("click", onAddItemSubmit);
   clearBtn.addEventListener("click", clearItems);
   itemFilter.addEventListener("input", filterItems);

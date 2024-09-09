@@ -25,16 +25,16 @@
           </div>
           <input class="input-bx item-name w-full p-2 mb-4 border rounded" type="text" placeholder="Item Name"
             required />
-          <input class="input-bx quantity w-full p-2 mb-4 border rounded" placeholder="Quantity" type="text" required />
+          <input class="input-bx quantity w-full p-2 mb-4 border rounded" placeholder="Quantity" type="number" required />
           <div class="input-bx mb-4" id="prioty">
             <label for="Priority" class="block font-medium text-gray-600 mb-2">Priority:</label>
             <div class="flex items-center justify-center space-x-2 md:space-x-4">
-              <input type="radio" name="Priority" value="High" class="input-bx mr-1" />
-              <label for="High Priority" class="text-gray-700">High</label>
-              <input type="radio" name="Priority" value="Medium" class="input-bx mr-1" />
-              <label for="Medium Priority" class="text-gray-700">Medium</label>
               <input type="radio" name="Priority" value="Normal" class="input-bx mr-1" checked />
               <label for="Normal" class="text-gray-700">Normal</label>
+              <input type="radio" name="Priority" value="Medium" class="input-bx mr-1" />
+              <label for="Medium Priority" class="text-gray-700">Medium</label>
+              <input type="radio" name="Priority" value="High" class="input-bx mr-1" />
+              <label for="High Priority" class="text-gray-700">High</label>
             </div>
           </div>
           <textarea id="addNote" rows="3" class="w-full p-2 border rounded"
@@ -53,7 +53,8 @@
     <div class="h-fit p-6 bg-gray-100 rounded-lg shadow-md w-full mb-20 xl:w-4/5 h-3/4 lg: w-4/5 md:w-3/4">
       <div id="srch-bar" class="relative flex items-center my-2 md:mx-5">
         <input id="srch-input" type="text" placeholder="Filter Items" class="w-full p-2 border rounded" />
-        <i class="absolute right-5 bx bx-search-alt text-gray-600 ml-2 text-lg"></i>
+        <i id="srch-ico" class="absolute right-5 bx bx-search-alt text-gray-600 ml-2 text-lg"></i>
+        <i title="Clear Feild" id="clr-ico" class='bx bxs-x-circle absolute right-5 text-gray-600 ml-2 text-lg hover:text-red-700' ></i>
       </div>
       <div class="list-wrapper w-full overflow-y-auto">
         <div class="w-full max-h-15 my-2 flex items-center justify-between">
