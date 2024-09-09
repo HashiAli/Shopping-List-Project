@@ -275,7 +275,10 @@ function filterItems() {
       item.style.display = "none";
     }
   })
-  if(visibleCount==0){document.querySelector('#no-items').style.display = "inline-block"  }
+  if(visibleCount==0){
+    document.querySelector('#no-items').style.display = "inline-block" 
+    clearBtn.style.display = "none";
+    }
   else{document.querySelector('#no-items').style.display="none"}
   counter.textContent = `Total Items: ${visibleCount}`;
 }
