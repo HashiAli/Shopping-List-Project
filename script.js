@@ -173,6 +173,9 @@ function charLength(){
 
   }
 }  
+
+ //The function `checkUI` updates the UI elements based on the number of items in a table.
+
 function checkUI() {
 
   const items = tableBody.querySelectorAll("tr");
@@ -258,29 +261,23 @@ function setItemToEdit(item) {
   showNotification("Edit Mode","blue")
 }
 
-function filterItems(e) {
-  let filteredItems = [];
+function filterItems() {
+  const counter = document.getElementById("counter");
+  let visibleCount = 0;
   const items = tableBody.querySelectorAll("tr");
   const text = itemFilter.value.toLowerCase()
-  if(!text==""){
-    items.forEach((item) => {
-      const firstCell = item.firstElementChild; // Access the first child (first <td>)
-      if (firstCell.textContent.toLowerCase().includes(text)) {
-        const secondCell = firstCell.nextElementSibling; // Access the second <td>
-        const thirdCell = secondCell.nextElementSibling; // Access the third <td>
-        const fourthCell = thirdCell.nextElementSibling;
-        let data={ itemName:firstCell.textContent,priority: secondCell.textContent, quantity:thirdCell.textContent,additionalNote:fourthCell.textContent}
-        // console.log(data);
-      tableBody.innerHTML=""
-      addItemToDOM(data)
-      
-      
-      
+  items.forEach((item) => {
+    if(item.children[0].textContent.toLowerCase().includes(text)){
+      item.style.display = "";
+      visibleCount++;
     }
-  });}
-  else{
-    displayItems()
-  }
+    else{
+      item.style.display = "none";
+    }
+  })
+  if(visibleCount==0){document.querySelector('#no-items').style.display = "inline-block"  }
+  else{document.querySelector('#no-items').style.display="none"}
+  counter.textContent = `Total Items: ${visibleCount}`;
 }
 
 
@@ -289,7 +286,7 @@ function init() {
   // Event Listeners
   itemSubmit.addEventListener("click", onAddItemSubmit);
   clearBtn.addEventListener("click", clearItems);
-  // itemFilter.addEventListener("input", filterItems);
+  itemFilter.addEventListener("input", filterItems);
   document.addEventListener("DOMContentLoaded", displayItems);
   additionalNote.addEventListener('input',charLength)
 }
