@@ -279,7 +279,10 @@ function filterItems() {
     document.querySelector('#no-items').style.display = "inline-block" 
     clearBtn.style.display = "none";
     }
-  else{document.querySelector('#no-items').style.display="none"}
+  else{
+    document.querySelector('#no-items').style.display="none"
+    clearBtn.style.display = "block";
+  }
   counter.textContent = `Total Items: ${visibleCount}`;
 }
 
