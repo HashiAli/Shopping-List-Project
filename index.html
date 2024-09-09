@@ -42,9 +42,12 @@
           <div class="text-xs font-bold w-full mb-4 text-right">
             <label class="text-gray-500" for="charLimit" id="charLimit">0/30</label>
           </div>
-          <button id="submit" type="submit" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
-            Add Item
-          </button>
+          <div class="gap-4 w-full text-white py-2 rounded flex">
+            <button id="submit" type="submit" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+              Add Item
+            </button>
+            <button id="cncl-btn" class=" w-full bg-red-500 text-white py-2 rounded hover:bg-red-600">Cancel</button>
+          </div>
         </form>
       </div>
     </div>
@@ -61,7 +64,7 @@
           <label for="counter" id="counter"
             class="block mt-4 ml-2 text-gray-700 font-medium underline underline-offset-8">Total Items: 0</label>
           <button id="clr-btn" class="bg-red-500 text-white py-1 px-3 mr-6 rounded hover:bg-red-600">
-            Clear All
+            Delete All
           </button>
         </div>
         <div class="p-0 m-0 relative overflow-auto max-h-[550px] w-full ">

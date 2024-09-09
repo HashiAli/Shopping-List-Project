@@ -9,6 +9,7 @@ const removeBtn = tableBody.querySelectorAll(".delete-btn");
 const clearBtn = document.getElementById("clr-btn");
 const editBtn = tableBody.querySelectorAll(".edit-btn");
 const clrFeild = document.getElementById("clr-ico")
+const cnclBtn = document.getElementById("cncl-btn");
 const regex = /^[a-zA-Z0-9]+$/;
 let isEditMode = false;
 
@@ -69,7 +70,7 @@ function onAddItemSubmit(e) {
       showNotification("Please fill in all fields !", "red");
       return;
   }
-  else if(!regex.test(itemName.value)){
+  else if(!regex.test(itemName.value.trim())){
     showNotification("Item name should only contain alphanumeric characters.","blue");
     return;
   }
@@ -192,6 +193,7 @@ function checkUI() {
   counter.textContent = `Total Items: ${items.length}`;
   document.querySelector('#charLimit').textContent=`0/30`
   itemSubmit.textContent = 'Add Item';
+  cnclBtn.style.display = "none";
   document.querySelector("form").reset();
   isEditMode = false;
 }
@@ -211,13 +213,16 @@ function checkIfItemExists(item) {
 }
 function removeItem(item) {
     // Remove item from DOM
-    item.remove()
-    // Remove item from local storage
-    removeItemFromStorage(item);
-    // Update UI
-    checkUI()
-    //Show Notification
-    showNotification("Item removed successfully!","red");
+    if(confirm('Are you sure ?')){
+
+      item.remove()
+      // Remove item from local storage
+      removeItemFromStorage(item);
+      // Update UI
+      checkUI()
+      //Show Notification
+      showNotification("Item removed successfully!","red");
+    }
   
 }
 
@@ -229,6 +234,19 @@ function removeItemFromStorage(item) {
   itemsFromStorage = itemsFromStorage.filter((i) => i.itemName !== itemName);
   // Re-set to localstorage
   localStorage.setItem("items", JSON.stringify(itemsFromStorage));
+}
+function cancelEdit(item) {
+  item.preventDefault()
+  let itemToCancel=tableBody.querySelector(".edit-mode")
+  itemToCancel.classList.remove("bg-slate-400")
+  itemToCancel.classList.remove("edit-mode")
+  itemName.value=""
+  quantity.value=""
+  selectRadioButton("Normal")
+  additionalNote.value=""
+  checkUI()
+  showNotification("Edit Mode Canceled","blue")
+
 }
 
 
@@ -244,7 +262,9 @@ function setItemToEdit(item) {
   isEditMode = true;
   document.querySelector("form").reset();
   item.classList.add("edit-mode");
-  itemSubmit.innerHTML = 'Update Item';
+  itemSubmit.innerHTML = 'Update';
+  cnclBtn.style.display = 'block';
+  cnclBtn.addEventListener("click",cancelEdit)
   itemName.value = item.firstChild.textContent;
   quantity.value = item.children[2].textContent;
   selectRadioButton(item.children[1].textContent);
