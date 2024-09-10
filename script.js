@@ -71,7 +71,7 @@ function onAddItemSubmit(e) {
       return;
   }
   else if(!regex.test(itemName.value.trim())){
-    showNotification("Item name should only contain alphanumeric characters.","yellow");
+    showNotification(" Only Alphanumeric Characters Allowed.","yellow");
     return;
   }
   // Check for edit mode
