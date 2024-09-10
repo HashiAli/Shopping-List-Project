@@ -1028,6 +1028,18 @@ body {
 #cncl-btn{
   display: none;
 }
+.bg-blue-600{
+  background-color: #2563eb;
+}
+.bg-red-600{
+  background-color: #dc2626;
+}
+.bg-green-600{
+  background-color: #16a34a;
+}
+.bg-yellow-600{
+  background-color: #ca8a04;
+}
 
 .even\:bg-gray-50:nth-child(even) {
   --tw-bg-opacity: 1;

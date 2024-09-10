@@ -16,9 +16,8 @@ let isEditMode = false;
 function showNotification(message ,color) {
   const msgCon = document.querySelector('#notifi');
   const notification = document.createElement("div");
-  let classes = "z-20 w-full h-14 rounded-lg shadow-md flex justify-center items-center text-2xl text-white mb-3 sm:w-1/2 md:w-full"
+  let classes = `z-20 w-full h-14 rounded-lg shadow-md flex justify-center items-center text-2xl text-white mb-3 sm:w-1/2 md:w-full bg-${color}-600`
   notification.className = classes
-  notification.classList.add`bg-${color}-600`
   notification.innerHTML = `<p>${message}</p>`;
   notification.classList.add("show");
   msgCon.appendChild(notification)
