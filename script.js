@@ -71,7 +71,7 @@ function onAddItemSubmit(e) {
       return;
   }
   else if(!regex.test(itemName.value.trim())){
-    showNotification("Item name should only contain alphanumeric characters.","blue");
+    showNotification("Item name should only contain alphanumeric characters.","yellow");
     return;
   }
   // Check for edit mode
@@ -79,7 +79,7 @@ function onAddItemSubmit(e) {
     const itemToEdit = tableBody.querySelector(".edit-mode");
     removeItemFromStorage(itemToEdit);
     itemToEdit.remove();
-    showNotification("Item Edited Successfully","blue")
+    showNotification("Item Edited Successfully","green")
   }
 
   else {
