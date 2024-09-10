@@ -1,13 +1,33 @@
-Mercury/
-Mercury.modules
-*.mh
-*.err
-*.init
-*.dll
-*.exe
-*.a
-*.so
-*.dylib
-*.beams
-*.d
-*.c_date
+# Node modules
+node_modules/
+
+# Build directories
+dist/
+build/
+
+# Environment variables
+.env
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# Coverage directory used by testing tools
+coverage/
+
+# Package lock files
+package-lock.json
+yarn.lock
+

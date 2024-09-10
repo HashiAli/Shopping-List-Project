@@ -16,13 +16,13 @@ let isEditMode = false;
 function showNotification(message ,color) {
   const msgCon = document.querySelector('#notifi');
   const notification = document.createElement("div");
-  let classes = "z-10 w-full h-20 rounded shadow-md flex justify-center items-center text-2xl text-white mb-3" +" bg-"+color+"-600"
+  let classes = "z-10 w-full h-15 rounded-lg shadow-md flex justify-center items-center text-2xl text-white mb-3" +" bg-"+color+"-600"
   notification.className = classes
   notification.innerHTML = `<p>${message}</p>`;
   notification.classList.add("show");
   msgCon.appendChild(notification)
 
-  // Automatically hide the notification after 2.5 seconds
+  // hide the notification after 2.5 seconds
   setTimeout(() => {
 
     notification.classList.remove("show");
@@ -83,7 +83,7 @@ function onAddItemSubmit(e) {
   }
 
   else {
-    if (checkIfItemExists(itemName.value)) {
+    if (checkIfItemExists(itemName.value.toLowerCase())) {
       showNotification("That item already exists!","yellow");
       return;
     }
@@ -202,7 +202,7 @@ function checkIfItemExists(item) {
   let exists = false;
 
   itemsFromStorage.forEach((e) => {
-    if (e.itemName.toLowerCase() === item.toLowerCase()) {
+    if (e.itemName === item) {
       exists = true;
     }
     return exists
