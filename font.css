@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap');
-form div h1{
-    font-family: 'SUSE';
-}
+.bg-red-600{background-color: #dc2626;}
+
+.bg-green-600{background-color: #16a34a;}
+
+.bg-blue-600{background-color: #2563eb;}
+
+.bg-yellow-600{background-color: #d97706;}
