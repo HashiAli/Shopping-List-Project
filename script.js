@@ -311,7 +311,9 @@ function filterItems() {
   }
   counter.textContent = `Total Items: ${visibleCount}`;
   if(text.length==0){
-  clrFeild.style.display = "none";}
+  clrFeild.style.display = "none";
+  document.querySelector('#no-items').style.display = "none"
+  }
   else{clrFeild.style.display = "inline-block";
     clrFeild.addEventListener('click',clearFeild)}
   }
