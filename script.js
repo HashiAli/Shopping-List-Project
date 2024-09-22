@@ -71,7 +71,7 @@ function onAddItemSubmit(e) {
       return;
   }
   else if(!regex.test(itemName.value.trim())){
-    showNotification(" Only Alphanumeric Characters Allowed.","yellow");
+    showNotification("Only Alphanumeric Characters Allowed.","yellow");
     return;
   }
   // Check for edit mode
@@ -161,7 +161,7 @@ function clearItems() {
       tableBody.removeChild(tableBody.firstChild);
     }
     // Clear from localStorage
-    localStorage.clear();
+    localStorage.clear(items);
     showNotification("All items cleared successfully!","blue"); 
     checkUI();
   }
